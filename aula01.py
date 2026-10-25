@@ -55,6 +55,31 @@ def solicitar_inteiro(mensagem):
         except ValueError:
             print("Entrada inválida. Por favor, digite um número inteiro.")
 
+
+def solicitar_texto(mensagem):
+    while True:
+        texto = input(mensagem).strip()
+
+        if texto == "":
+            print("Preencha o campo!")
+        else:
+            return texto
+
+
+def solicitar_confirmacao(mensagem):
+    while True:
+        c = input(mensagem).strip().lower()
+
+        if c == "s":
+            return True
+        elif c == "n":
+            return False
+        else:
+            print(
+                "Resposta inválida. Digite 's' ou 'n'."
+            )
+
+
         
         
 empresas =[]
@@ -68,39 +93,15 @@ def criar_empresa():
         
         
 
-            nome = input("Digite o nome da empresa:")
-            cidade = input("Digite a cidade da empresa:")
-            segmento = input("Digite o segmento da empresa:")
-            num_vendas = solicitar_inteiro("Digite o numero de vendas da empresa:")
-            num_produtos = solicitar_inteiro("Digite o numero de produtos da empresa:")    
+            nome = solicitar_texto("Nome da empresa:")
+            cidade = solicitar_texto("Cidade da empresa:")
+            segmento = solicitar_texto("Segmento da empresa:")
+            num_vendas = solicitar_inteiro("Número de vendas da empresa:")
+            num_produtos = solicitar_inteiro("Número de produtos da empresa:")    
+            loja_oficial = solicitar_confirmacao("Empresa possui loja oficial(s/n): ?")
+            mercado_lider = solicitar_confirmacao("Empresa é Mercado Líder: (s/n)?: ")
           
-            while True:
-
-                    loja_oficial = input("Empresa possui loja oficial(s/n): ?").strip().lower()
-                    if loja_oficial == "s":
-                        loja_oficial = True
-                        
-                        break
-                    elif loja_oficial == "n":
-                        loja_oficial = False
-                        break
-                    else:
-                        print(f"O valor digitado {loja_oficial} não é um valor valido por favor digite 's' ou 'n' para está questão!") 
-                        
-                        
-            while True:
-               
-                    mercado_lider = input("Empresa é Mercado Líder: (s/n)?: ").strip().lower()
-                    if mercado_lider == "s":
-                        mercado_lider = True
-                        break
-                    elif mercado_lider == "n":
-                        mercado_lider = False
-                        break
-                    else:
-                        print(f"O valor digitado {mercado_lider} não é um valor valido por favor digite 's' ou 'n' para está questão!")
-                
-                    
+          
             e = Empresa(
                         nome=nome,
                         cidade = cidade,
@@ -116,7 +117,7 @@ def criar_empresa():
             empresas.append(e)
 
             while True:
-                    continuar = input("Deseja cadastrar outra empresa? (s/n): ").strip().lower()
+                    continuar = input("Deseja cadastrar outra empresa? (s/n): ")
                     if continuar == "s":
                         break
                     elif continuar== "n":
@@ -139,7 +140,10 @@ def criar_empresa():
         print(f"Mercado Líder:{e.mercado_lider}")        
 
             
-criar_empresa()
+
+if __name__ == "__main__":
+    criar_empresa()
+
                     
                         
                 
